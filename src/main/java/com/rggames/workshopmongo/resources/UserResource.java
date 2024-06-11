@@ -53,4 +53,14 @@ public class UserResource {
 		return ResponseEntity.noContent().build();   //código 204, quando não retorna nada
 	}
 	
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)   
+	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id){   
+		User obj = service.fromDTO(objDto);   //converte DTO para User
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();   //código 204, quando não retorna nada
+	}
+	
+	
 }
