@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.rggames.workshopmongo.domain.Post;
 import com.rggames.workshopmongo.domain.User;
 import com.rggames.workshopmongo.dto.UserDTO;
 import com.rggames.workshopmongo.services.UserService;
@@ -60,6 +61,13 @@ public class UserResource {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();   //código 204, quando não retorna nada
+	}
+	
+	
+	@RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+ 	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
 	}
 	
 	
